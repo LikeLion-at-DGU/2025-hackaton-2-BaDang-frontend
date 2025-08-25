@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import NewsCard from "../components/NewsCard";
@@ -12,6 +12,8 @@ import { useFavorites } from "../context/FavoritesContext";
 import { useGetNewsletterList } from "../hooks/queries/useGetNewsletterList";
 import { useGetNewsletterSearch } from "../hooks/queries/useGetNewsletterSearch";
 import { useAuth } from "../context/AuthContext";
+import useCreateNewsletter from "../hooks/queries/useCreateNewsletter";
+import useNewsletterWeek from "../hooks/queries/useNewsletterWeek";
 
 /** ===== 레이아웃 ===== */
 const Page = styled.div`
@@ -111,7 +113,38 @@ export default function CustomKeywordNewsPage() {
   const { likedIds, isLiked, toggleLike } = useFavorites();
   const [favoriteOnly, setFavoriteOnly] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const createNewsletter = useCreateNewsletter();
   const totalPages = 1;
+
+  // useEffect(() => {
+  //   if (!storeId) return;
+
+  //   const generate = async () => {
+  //     try {
+  //       const res = await fetch(
+  //         `${import.meta.env.VITE_BACKEND_URL}/newsletter/newsletters/${storeId}/generate`,
+  //         {
+  //           method: "POST",
+  //           credentials: "include",
+  //           headers: { "Content-Type": "application/json" },
+  //         }
+  //       );
+
+  //       if (res.ok) {
+  //         console.log("뉴스레터 자동생성 요청 성공");
+  //         // 생성 후 목록을 즉시 반영하려면 페이지 리로드 또는 리스트 재요청 필요
+  //         // 여기서는 간단히 페이지를 새로고침하여 최신 목록을 가져옵니다.
+  //       } else {
+  //         const err = await res.json().catch(() => null);
+  //         console.warn("뉴스레터 자동생성 실패:", err);
+  //       }
+  //     } catch (e) {
+  //       console.error("뉴스레터 자동생성 중 오류:", e);
+  //     }
+  //   };
+
+  //   generate();
+  // }, [storeId]);
 
   // 전체 목록
   const {
@@ -320,22 +353,27 @@ export default function CustomKeywordNewsPage() {
             <NoResult onMakeReport={handleMakeReport} />
           )}
           <CardsGrid>
-            {displayedNewsletters.map((item) => (
-              <NewsCard
-                key={item.id}
-                id={item.id}
-                title={item.title}
-                keyword={item.keyword}
-                date={item.date}
-                imageUrl={item.imageUrl}
-                isOrange={item.isOrange}
-                liked={isLiked(item.id)}
-                onToggleLike={() => toggleLike(item.id)}
-                onClick={() =>
-                  navigate(`/news/${item.id}`, { state: { item } })
-                }
-              />
-            ))}
+            {displayedNewsletters.map((item) => {
+              // 월, 주차 파싱
+              const {year, month, week} = useNewsletterWeek(item.createdAt);
+
+              return (
+                <NewsCard
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  keyword={item.keywords[0].keywordName}
+                  date={`${year}년 ${month}월 ${week}주차`}
+                  imageUrl={item.keywords[0].keywordImageUrl}
+                  isOrange={item.isUserMade}
+                  liked={isLiked(item.id)}
+                  onToggleLike={() => toggleLike(item.id)}
+                  onClick={() =>
+                    navigate(`/news/${item.id}`, { state: { item } })
+                  }
+                />
+              )
+            })}
           </CardsGrid>
         </Section>
 

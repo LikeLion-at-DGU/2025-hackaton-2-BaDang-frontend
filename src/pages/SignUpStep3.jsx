@@ -305,7 +305,7 @@ const AddBtn = styled.button`
   font-weight: 700;
   font-size: 16px;
   color: #fff;
-  background: #e5935d;      /* 오렌지 버튼 */
+  background: #ff9762;      /* 오렌지 버튼 */
   cursor: pointer;
 
   &:disabled {
@@ -330,7 +330,7 @@ const NextButton = styled.button`
   font-weight: 800;
   font-size: 18px;
   color: #fff;
-  background: #0046ff;
+  background: #759afc;
   cursor: pointer;
 
   &:disabled {

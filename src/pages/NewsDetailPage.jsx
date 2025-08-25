@@ -28,7 +28,7 @@ export default function NewsDetailPage() {
             <Title>{newsletter?.title}</Title>
 
             <MetaRow>
-              <ChipPrimary>{newsletter?.keyword}</ChipPrimary>
+              <ChipPrimary>{newsletter?.keywords?.[0]?.keywordName}</ChipPrimary>
               <ChipLine>{newsletter?.createdAt}</ChipLine>
               <LikeBtn type="button" onClick={() => toggleLike(id)}>
                 찜하기
@@ -79,7 +79,7 @@ const IssueBadge = styled.span`
   height: 28px;
   padding: 0 10px;
   border-radius: 999px;
-  background: #ff6a3d;
+  background: #ff9762;
   color: #fff;
   font-weight: 800;
   font-size: 14px;
@@ -115,7 +115,7 @@ const ChipBase = styled.span`
 
 const ChipPrimary = styled(ChipBase)`
   color: #fff;
-  background: #0046ff;
+  background: #ff9762;
 `;
 
 const ChipLine = styled(ChipBase)`

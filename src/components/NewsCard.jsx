@@ -32,7 +32,7 @@ const Thumbnail = styled.img`
   width: 100%;
   height: 100%;
   background-color: aliceblue;
-  border-radius: 8px 8px 0 0;
+  border-radius: 20px 20px 0 0;
 `;
 
 const HeartButton = styled.img`

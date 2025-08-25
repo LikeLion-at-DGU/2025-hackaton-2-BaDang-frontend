@@ -1,10 +1,9 @@
-// components/BaseC/Navbar.jsx 
-
 import styled from 'styled-components'; 
 import React from 'react'; 
 import { NavLink, Link, useNavigate } from 'react-router-dom'; // NavLink가 기본으로 사용됩니다.
 import logoSvg from '../../assets/BadangLogo.svg'; 
 import { useAuth } from '../../context/AuthContext'; 
+import NavItem from './NavItem';
 
 // 로고 및 기본 컨테이너 스타일 (기존과 동일)
 const Logo = styled.img`
@@ -69,38 +68,39 @@ const LogoLink = styled(Link)`
     height: 100%;
 `;
 
-// ✅ a 태그 대신 NavLink를 기반으로 스타일링합니다.
-const StyledNavLink = styled(NavLink)`
-    color: #494954;
-    text-align: center;
-    font-family: SUIT;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    white-space: nowrap;
-    height: 41px;
-    min-width: fit-content;
+const StyledNavItem = styled.div`
+  color: #494954;
+  text-align: center;
+  font-family: SUIT;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  white-space: nowrap;
+  height: 41px;
+  min-width: fit-content;
 
-    text-decoration: none;  
-    display: flex;          
-    justify-content: center;
-    align-items: center;
-    border-radius: 60px;
-    padding: 9px 13px;
-    box-sizing: border-box;
-    transition: all 0.2s ease;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 60px;
+  padding: 9px 13px;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+  cursor: pointer;
 
-    // NavLink가 활성화되면 active 클래스가 자동으로 추가됩니다.
-    &.active {
-        background-color: #759AFC;
-        color: #FAF9F6;
-    }
-    
-    &:hover:not(.active) {
-        background-color: #FFF;
-        color: #759AFC;
-    }
+  ${({ $active }) =>
+    $active &&
+    `
+      background-color: #759AFC;
+      color: #FAF9F6;
+  `}
+
+  &:hover {
+    background-color: ${({ $active }) => ($active ? "#759AFC" : "#FFF")};
+    color: ${({ $active }) => ($active ? "#FAF9F6" : "#759AFC")};
+  }
 `;
 
 function Navbar() {
@@ -137,16 +137,16 @@ function Navbar() {
         <Menu>
             {/* ✅ onClick 대신 to prop을 사용합니다. */}
             <MenuItem>
-                <StyledNavLink to="/online-review">온라인 리뷰 분석</StyledNavLink>
+                <NavItem to="/online-review">온라인 리뷰 분석</NavItem>
             </MenuItem>
             <MenuItem>
-                <StyledNavLink to="/custom-keyword-news">맞춤형 키워드 뉴스</StyledNavLink>
+                <NavItem to="/custom-keyword-news">맞춤형 키워드 뉴스</NavItem>
             </MenuItem>
             <MenuItem>
-                <StyledNavLink to="/collaboration-management">협업 관리</StyledNavLink>
+                <NavItem to="/collaboration-management">협업 관리</NavItem>
             </MenuItem>
             <MenuItem>
-                <StyledNavLink to="/profile-edit">정보 수정</StyledNavLink>
+                <NavItem to="/profile-edit">정보 수정</NavItem>
             </MenuItem>
         </Menu>
         <LogOut onClick={handleLogout}>로그아웃</LogOut>

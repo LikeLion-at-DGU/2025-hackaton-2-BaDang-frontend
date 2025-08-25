@@ -162,11 +162,11 @@ const Input = styled.input`
   outline: none; padding: 0 16px; font-size: 16px; color: #17171b;
   &::placeholder { color: #98a2b3; }
   &:focus { border-color: #759afc; box-shadow: 0 0 0 3px rgba(117,154,252,0.2); }
-  &[aria-invalid="true"] { border-color: #ff6a3d; }
+  &[aria-invalid="true"] { border-color: #ff9762; }
 `;
 
 const Error = styled.span`
-  margin-top: 4px; font-size: 13px; color: #ff6a3d; font-weight: 600;
+  margin-top: 4px; font-size: 13px; color: #ff9762; font-weight: 600;
 `;
 
 const Footer = styled.div`

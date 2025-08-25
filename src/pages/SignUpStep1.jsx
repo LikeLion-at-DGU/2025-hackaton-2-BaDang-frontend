@@ -202,14 +202,14 @@ const Input = styled.input`
   }
 
   &[aria-invalid="true"] {
-    border-color: #ff6a3d;
+    border-color: #ff9762;
   }
 `;
 
 const Error = styled.span`
   margin-top: 8px;
   font-size: 13px;
-  color: #ff6a3d;
+  color: #ff9762;
   font-weight: 600;
 `;
 
@@ -227,7 +227,7 @@ const NextButton = styled.button`
   font-weight: 800;
   font-size: 18px;
   color: #fff;
-  background: #0046ff;
+  background: #759afc;
   cursor: pointer;
   transition: transform .03s ease;
 

@@ -347,7 +347,7 @@ const SubmitButton = styled.button`
   font-weight: 800;
   font-size: 18px;
   color: #fff;
-  background: #0046ff;
+  background: #759afc;
   transition: transform 0.03s ease;
   cursor: pointer;
 
