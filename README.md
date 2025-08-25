@@ -59,8 +59,8 @@ git checkout -b feature/#이슈번호-스크린ID-작업명
 
 ```bash
 # develop 최신화 (생략 가능하지만 권장)
-git checkout develop
-git pull origin develop
+git checkout dev
+git pull origin dev
 
 # 작업 브랜치로 이동
 git checkout feature/#...
@@ -71,11 +71,4 @@ git merge develop
 # 충돌 해결 후 커밋
 ```
 
-## 📏 컨벤션
 
-- 🌿 [Commit Convention]
-- 🪵 [Branch Convention]
-- 📌 [Issue Convention]
-- ✅ [PR Convention]
-
----
